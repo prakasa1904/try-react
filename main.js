@@ -9,20 +9,23 @@ var ReactDOM = require('react-dom');
 
 var Header = React.createClass({
 	render: function(){
-		return(<header style="{{backgroundColor:'gray'}}">
-				<HelloMessage name="Junk" />
+		return(<header style={{backgroundColor:'gray'}}>
+				<HelloMessage name={this.props.myName} />
 			</header>
 		);
 	}
 });
 
 var HelloMessage = React.createClass({
+	getInitialState: function(){
+		return {nama: 'Prakasa'};
+	},
 	render: function(){
-		return (<h1>Hello {this.props.name}</h1>);
+		return (<h1>Hello {this.state.nama}</h1>);
 	}
 });
 
 ReactDOM.render(
-	<HelloMessage name="Kikuk" />,
+	<Header myName="React" />,
 	document.getElementById('main')
 );

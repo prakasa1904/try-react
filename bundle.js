@@ -14,8 +14,8 @@ var Header = React.createClass({
 	render: function () {
 		return React.createElement(
 			'header',
-			{ style: '{{backgroundColor:\'gray\'}}' },
-			React.createElement(HelloMessage, { name: 'Junk' })
+			{ style: { backgroundColor: 'gray' } },
+			React.createElement(HelloMessage, { name: this.props.myName })
 		);
 	}
 });
@@ -23,17 +23,20 @@ var Header = React.createClass({
 var HelloMessage = React.createClass({
 	displayName: 'HelloMessage',
 
+	getInitialState: function () {
+		return { nama: 'Prakasa' };
+	},
 	render: function () {
 		return React.createElement(
 			'h1',
 			null,
 			'Hello ',
-			this.props.name
+			this.state.nama
 		);
 	}
 });
 
-ReactDOM.render(React.createElement(HelloMessage, { name: 'Kikuk' }), document.getElementById('main'));
+ReactDOM.render(React.createElement(Header, { myName: 'React' }), document.getElementById('main'));
 
 },{"react":165,"react-dom":29}],2:[function(require,module,exports){
 (function (process){
