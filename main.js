@@ -8,9 +8,16 @@ var ReactDOM = require('react-dom');
 );*/
 
 var Header = React.createClass({
+	getInitialState: function(){
+                return {bc: 'gray'};
+        },
+	handleClick: function(e){
+		this.setState({bc: 'red'})
+                e.preventDefault();
+        },
 	render: function(){
-		return(<header style={{backgroundColor:'gray'}}>
-				<HelloMessage name={this.props.myName} />
+		return(<header style={{backgroundColor:this.state.bc}}>
+				<HelloMessage clickHandler={this.handleClick} name={this.props.myName} />
 			</header>
 		);
 	}
@@ -20,8 +27,27 @@ var HelloMessage = React.createClass({
 	getInitialState: function(){
 		return {nama: 'Prakasa'};
 	},
+	componentDidMount: function(){
+		var timeoutID;
+		var $this = this;
+		
+		timeoutID = setTimeout(function(){
+			$this.setState({nama: 'Rubbick'});
+			clearTimeout(timeoutID);
+		}, 3000);
+	},
+	handleClick: function(e){
+		alert('Hallo ' + this.state.nama);
+		e.preventDefault();
+	},
 	render: function(){
-		return (<h1>Hello {this.state.nama}</h1>);
+		return (<h1>
+			Hello {this.state.nama}
+				<a href="#" onClick={this.props.clickHandler}>
+					{this.state.nama}
+				</a>
+			</h1>
+		);
 	}
 });
 
